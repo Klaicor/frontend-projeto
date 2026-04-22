@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fornecedores - TechPaper</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="dashboard-page">
+    
+    <div id="toastContainer" class="toast-container"></div>
+
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <i class="fa-solid fa-file-signature"></i>
+            <h2>TechPaper</h2>
+        </div>
+        <ul class="nav-links">
+            <li><a href="dashboard.html"><i class="fa-solid fa-chart-line"></i> Visão Geral</a></li>
+            <li><a href="produtos.html"><i class="fa-solid fa-tags"></i> Produtos</a></li>
+            <li><a href="fornecedores.html" class="active"><i class="fa-solid fa-truck-field"></i> Fornecedores</a></li>
+            <li><a href="estoque.html"><i class="fa-solid fa-boxes-stacked"></i> Estoque</a></li>
+            <li><a href="movimentacao.html"><i class="fa-solid fa-right-left"></i> Movimentação</a></li>
+            <li><a href="relatorios.html"><i class="fa-solid fa-file-invoice-dollar"></i> Relatórios</a></li>
+            <li><a href="usuarios.html"><i class="fa-solid fa-users-gear"></i> Usuários</a></li>
+            <li><a href="suporte.html"><i class="fa-solid fa-headset"></i> Suporte</a></li>
+        </ul>
+    </aside>
+
+    <main class="main-content">
+        <header class="topbar">
+            <h1>Gestão de Fornecedores</h1>
+            
+            <div class="user-menu-container">
+                <div class="user-trigger" onclick="toggleUserMenu()">
+                    <span>Olá, Supervisor</span>
+                    <i class="fa-solid fa-circle-user user-icon"></i>
+                    <i class="fa-solid fa-chevron-down" style="font-size: 10px; color: #ccc;"></i>
+                </div>
+
+                <div class="user-dropdown" id="userDropdown">
+		<a href="#" onclick="abrirModal('modalMeusDados'); return false;"><i class="fa-solid fa-address-card"></i> Meus Dados</a>
+    		<a href="#" onclick="abrirModal('modalConfig'); return false;"><i class="fa-solid fa-gear"></i> Configurações</a>
+                    <a href="login.html" class="logout"><i class="fa-solid fa-power-off"></i> Encerrar Sessão</a>
+                </div>
+            </div>
+        </header>
+
+        <section class="content-area">
+            <div class="page-body">
+                
+                <div class="form-container">
+                    <div class="form-header">
+                        <h2><i class="fa-solid fa-building-user" style="color: var(--azul-primario); margin-right: 10px;"></i> Cadastrar Novo Fornecedor</h2>
+                    </div>
+
+                    <form id="formCadastroFornecedor">
+                        
+                        <div class="form-grid">
+                            <div class="input-group">
+                                <label for="cnpj">CNPJ</label>
+                                <div class="input-wrapper">
+                                    <i class="fa-solid fa-id-card"></i>
+                                    <input type="text" id="cnpj" placeholder="00.000.000/0000-00" maxlength="18" required>
+                                </div>
+                            </div>
+
+                            <div class="input-group">
+                                <label for="razaoSocial">Razão Social</label>
+                                <div class="input-wrapper">
+                                    <i class="fa-solid fa-file-contract"></i>
+                                    <input type="text" id="razaoSocial" placeholder="Ex: Tilibra Produtos de Papelaria S.A." required>
+                                </div>
+                            </div>
+
+                            <div class="input-group">
+                                <label for="nomeFantasia">Nome Fantasia</label>
+                                <div class="input-wrapper">
+                                    <i class="fa-solid fa-shop"></i>
+                                    <input type="text" id="nomeFantasia" placeholder="Ex: Tilibra" required>
+                                </div>
+                            </div>
+
+                            <div class="input-group">
+                                <label for="categoriaFornecedor">Principal Segmento</label>
+                                <select id="categoriaFornecedor" class="form-input" required>
+                                    <option value="" disabled selected>Selecione um segmento...</option>
+                                    <option value="papeis">Papéis e Celulose</option>
+                                    <option value="escrita">Materiais de Escrita</option>
+                                    <option value="tecnologia">Acessórios de Informática</option>
+                                    <option value="diversos">Diversos / Variedades</option>
+                                </select>
+                            </div>
+
+                            <div class="input-group">
+                                <label for="telefone">Telefone Comercial</label>
+                                <div class="input-wrapper">
+                                    <i class="fa-solid fa-phone"></i>
+                                    <input type="tel" id="telefone" placeholder="(00) 0000-0000" required>
+                                </div>
+                            </div>
+
+                            <div class="input-group">
+                                <label for="emailContato">E-mail de Contato (Vendas)</label>
+                                <div class="input-wrapper">
+                                    <i class="fa-solid fa-envelope"></i>
+                                    <input type="email" id="emailContato" placeholder="vendas@fornecedor.com.br" required>
+                                </div>
+                            </div>
+
+                            <div class="input-group">
+                                <label for="prazoEntrega">Prazo Médio de Entrega (Dias)</label>
+                                <div class="input-wrapper">
+                                    <i class="fa-solid fa-truck-fast"></i>
+                                    <input type="number" id="prazoEntrega" placeholder="Ex: 5" min="1" required>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="text-align: right;">
+                            <button type="submit" class="btn-submit">
+                                <i class="fa-solid fa-floppy-disk"></i>
+                                Salvar Fornecedor
+                            </button>
+                        </div>
+                    </form>
+
+                </div>
+                
+            </div>
+
+            <div class="form-container" style="margin-top: 30px;">
+                    <div class="form-header" style="display: flex; justify-content: space-between; align-items: center;">
+                        <h2><i class="fa-solid fa-list" style="color: var(--azul-primario); margin-right: 10px;"></i> Fornecedores Cadastrados</h2>
+                        
+                        <div class="search-box">
+                            <input type="text" id="buscaFornecedor" oninput="filtrarFornecedores()" placeholder="Buscar CNPJ ou Empresa..." style="padding: 8px; width: 300px; border: 1px solid #ccc; border-radius: 5px;">
+                        </div>
+                    </div>
+
+                    <table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
+                        <thead>
+                            <tr style="border-bottom: 2px solid #eee; text-align: left; color: #7f8c8d;">
+                                <th style="padding: 15px;">CNPJ</th>
+                                <th style="padding: 15px;">Empresa</th>
+                                <th style="padding: 15px;">Segmento</th>
+                                <th style="padding: 15px;">Telefone</th>
+                                <th style="padding: 15px;">E-mail</th>
+                                <th style="padding: 15px;">Ações</th>
+                            </tr>
+                        </thead>
+                        
+                        <tbody id="corpoTabelaFornecedores">
+                            
+                        </tbody>
+                    </table>
+                </div>
+        </section>
+
+        <footer class="dashboard-footer">
+            <div>&copy; 2026 <b>TechPaper Sistema de Gestão</b>. Todos os direitos reservados.</div>
+            <div class="footer-info">
+                <span><i class="fa-solid fa-code"></i> Versão 1.0.0</span>
+            </div>
+        </footer>
+    </main>
+
+<div class="modal-overlay" id="modalMeusDados">
+    <div class="modal-content">
+        <button class="modal-close" onclick="fecharModal('modalMeusDados')"><i class="fa-solid fa-xmark"></i></button>
+        <h2 style="color: var(--azul-escuro); margin-bottom: 20px;"><i class="fa-solid fa-address-card"></i> Meu Perfil</h2>
+        
+        <div class="input-group">
+            <label>Nome Completo</label>
+            <input type="text" class="form-input" value="Administrador Sistema" readonly style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; background-color: #f9f9f9;">
+        </div>
+        
+        <div class="input-group">
+            <label>E-mail Corporativo</label>
+            <input type="email" class="form-input" value="admin@techpaper.com" readonly style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; background-color: #f9f9f9;">
+        </div>
+
+        <div class="input-group">
+            <label>Nível de Acesso</label>
+            <input type="text" class="form-input" value="Supervisor Total" readonly style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; background-color: #f9f9f9; color: var(--azul-primario); font-weight: bold;">
+        </div>
+
+        <button class="btn-submit" onclick="fecharModal('modalMeusDados')" style="width: 100%; margin-top: 10px;">Fechar</button>
+    </div>
+</div>
+
+<div class="modal-overlay" id="modalConfig">
+    <div class="modal-content">
+        <button class="modal-close" onclick="fecharModal('modalConfig')"><i class="fa-solid fa-xmark"></i></button>
+        <h2 style="color: var(--azul-escuro); margin-bottom: 20px;"><i class="fa-solid fa-gear"></i> Configurações</h2>
+        
+        <div style="display: flex; flex-direction: column; gap: 15px;">
+            <label style="display: flex; align-items: center; gap: 10px; cursor: pointer; color: var(--azul-escuro);">
+                <input type="checkbox" checked style="width: 18px; height: 18px;"> Receber alertas de estoque baixo por e-mail
+            </label>
+            
+            <label style="display: flex; align-items: center; gap: 10px; cursor: pointer; color: var(--azul-escuro);">
+                <input type="checkbox" style="width: 18px; height: 18px;"> Ativar modo escuro (Dark Mode)
+            </label>
+
+            <div class="input-group" style="margin-top: 10px;">
+                <label>Idioma do Sistema</label>
+                <select style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px;">
+                    <option value="pt" selected>Português (BR)</option>
+                    <option value="en">Inglês (US)</option>
+                    <option value="es">Espanhol</option>
+                </select>
+            </div>
+        </div>
+
+        <button class="btn-submit" onclick="fecharModal('modalConfig')" style="width: 100%; margin-top: 20px; background-color: #27ae60;">Salvar Preferências</button>
+    </div>
+</div>
+
+<div class="modal-overlay" id="modalExcluir">
+    <div class="modal-content" style="text-align: center; max-width: 400px;">
+        <h2 style="color: var(--vermelho-sair); margin-bottom: 15px;">
+            <i class="fa-solid fa-triangle-exclamation"></i> Atenção!
+        </h2>
+        <p style="margin-bottom: 25px; color: #555; line-height: 1.5;">
+            Tem certeza que deseja excluir este Fornecedor? <br><b>Esta ação não pode ser desfeita.</b>
+        </p>
+        <div style="display: flex; gap: 10px; justify-content: center;">
+            <button class="btn-submit" onclick="fecharModal('modalExcluir')" style="background-color: #95a5a6; width: 50%;">Cancelar</button>
+            <button class="btn-submit" onclick="executarExclusaoFornecedor()" style="background-color: var(--vermelho-sair); width: 50%;">Sim, Excluir</button>
+        </div>
+    </div>
+</div>
+    <script>
+        function toggleUserMenu() {
+            const dropdown = document.getElementById('userDropdown');
+            dropdown.classList.toggle('active');
+        }
+
+        window.onclick = function(event) {
+            if (!event.target.closest('.user-menu-container')) {
+                const dropdown = document.getElementById('userDropdown');
+                if (dropdown.classList.contains('active')) {
+                    dropdown.classList.remove('active');
+                }
+            }
+        }
+
+   
+	// Funções para abrir e fechar os Modais
+	function abrirModal(idModal) {
+  	document.getElementById(idModal).classList.add('active');
+   	// Fecha o dropdown do usuário automaticamente para a tela ficar limpa
+  	document.getElementById('userDropdown').classList.remove('active');
+	}
+
+	function fecharModal(idModal) {
+    	document.getElementById(idModal).classList.remove('active');
+}
+
+    </script>
+
+    <div id="toastContainer" class="toast-container"></div>
+
+    <script src="js/fornecedores.js"></script>
+    <script src="js/auth.js"></script>
+
+</body>
+</html>

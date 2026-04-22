@@ -1,0 +1,712 @@
+/* =========================================
+   VARIÁVEIS GERAIS (Paleta TechPaper)
+========================================= */
+:root {
+    --azul-fundo: #eaf2f8;
+    --azul-claro: #d4e6f1;
+    --azul-primario: #2980b9;
+    --azul-hover: #1f618d;
+    --azul-escuro: #154360;
+    --branco: #ffffff;
+    --cinza-texto: #555555;
+    --cinza-fundo: #f8f9fa;
+    --cinza-placeholder: #999999;
+    --vermelho-sair: #e74c3c;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* =========================================
+   1. TELA DE LOGIN (index.html)
+========================================= */
+body.login-page {
+    background-color: var(--azul-fundo);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.login-wrapper {
+    width: 100%;
+    max-width: 420px;
+    padding: 20px;
+}
+
+.login-container {
+    background-color: var(--branco);
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(21, 67, 96, 0.15);
+    width: 100%;
+    text-align: center;
+    border-top: 5px solid var(--azul-primario);
+}
+
+.logo-area { margin-bottom: 30px; }
+
+.logo-icon {
+    width: 60px;
+    height: 60px;
+    background-color: var(--azul-primario);
+    color: var(--branco);
+    font-size: 28px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto 15px auto;
+    box-shadow: 0 4px 10px rgba(41, 128, 185, 0.3);
+}
+
+.logo-area h1 {
+    color: var(--azul-texto);
+    font-size: 24px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+}
+
+.logo-area p {
+    color: var(--cinza-texto);
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+.input-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: var(--azul-escuro); /* Ajustado para usar variável correta */
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.input-wrapper i {
+    position: absolute;
+    left: 14px;
+    color: var(--azul-primario);
+    font-size: 16px;
+}
+
+.input-wrapper input {
+    width: 100%;
+    padding: 12px 12px 12px 40px;
+    border: 2px solid var(--azul-claro);
+    border-radius: 6px;
+    font-size: 15px;
+    color: var(--azul-escuro); /* Ajustado para usar variável correta */
+    transition: all 0.3s ease;
+}
+
+.input-wrapper input::placeholder {
+    color: var(--cinza-placeholder);
+}
+
+.input-wrapper input:focus {
+    outline: none;
+    border-color: var(--azul-primario);
+    box-shadow: 0 0 0 3px rgba(41, 128, 185, 0.2);
+}
+
+.btn-login {
+    width: 100%;
+    padding: 14px;
+    background-color: var(--azul-primario);
+    color: var(--branco);
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.1s ease;
+    margin-top: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.btn-login:hover { background-color: var(--azul-hover); }
+.btn-login:active { transform: scale(0.98); }
+
+.login-footer {
+    text-align: center;
+    margin-top: 25px;
+    color: var(--cinza-texto);
+    font-size: 12px;
+}
+
+.login-footer a {
+    color: var(--azul-primario);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.login-footer a:hover { text-decoration: underline; }
+
+/* =========================================
+   2. TELA DO DASHBOARD (dashboard.html)
+========================================= */
+body.dashboard-page {
+    display: flex;
+    height: 100vh;
+    background-color: var(--cinza-fundo);
+    overflow: hidden;
+}
+
+.sidebar {
+    width: 250px;
+    background-color: var(--azul-escuro);
+    color: var(--branco);
+    display: flex;
+    flex-direction: column;
+    z-index: 100;
+}
+
+.sidebar-header {
+    padding: 30px 20px;
+    text-align: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.sidebar-header i {
+    font-size: 35px;
+    color: var(--azul-primario);
+    margin-bottom: 10px;
+}
+
+.sidebar-header h2 {
+    font-size: 22px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    color: var(--branco);
+}
+
+.nav-links {
+    list-style: none;
+    padding: 20px 0;
+    flex-grow: 1;
+    overflow-y: auto;
+}
+
+.nav-links a {
+    color: var(--azul-claro);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 12px 25px;
+    font-size: 15px;
+    transition: 0.3s;
+}
+
+.nav-links a:hover, .nav-links a.active {
+    background-color: var(--azul-primario);
+    color: var(--branco);
+}
+
+.main-content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.topbar {
+    background-color: var(--branco);
+    padding: 0 30px;
+    height: 70px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    z-index: 90;
+}
+
+.topbar h1 {
+    color: var(--azul-escuro);
+    font-size: 20px;
+}
+
+.user-menu-container { position: relative; }
+
+.user-trigger {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+    padding: 8px 15px;
+    border-radius: 50px;
+    transition: background 0.3s;
+}
+
+.user-trigger:hover { background-color: var(--azul-fundo); }
+
+.user-trigger span {
+    font-weight: 600;
+    color: var(--azul-escuro); /* Ajustado para usar variável correta */
+    font-size: 14px;
+}
+
+.user-trigger i.user-icon {
+    font-size: 28px;
+    color: var(--azul-primario);
+}
+
+.user-dropdown {
+    position: absolute;
+    top: 110%;
+    right: 0;
+    width: 200px;
+    background-color: var(--branco);
+    border-radius: 8px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    display: none;
+    padding: 10px 0;
+    border: 1px solid var(--azul-claro);
+}
+
+.user-dropdown.active {
+    display: block;
+    animation: slideDown 0.2s ease;
+}
+
+.user-dropdown a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 20px;
+    text-decoration: none;
+    color: var(--cinza-texto);
+    font-size: 14px;
+    transition: 0.2s;
+}
+
+.user-dropdown a:hover {
+    background-color: var(--azul-fundo);
+    color: var(--azul-primario);
+}
+
+.user-dropdown a.logout {
+    color: var(--vermelho-sair);
+    border-top: 1px solid #eee;
+    margin-top: 5px;
+}
+
+@keyframes slideDown {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.content-area {
+    padding: 30px;
+    flex-grow: 1;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.page-body { flex-grow: 1; }
+
+.dashboard-footer {
+    background-color: var(--branco);
+    padding: 20px 30px;
+    border-top: 1px solid var(--azul-claro);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--cinza-texto);
+    font-size: 13px;
+}
+
+.dashboard-footer b { color: var(--azul-escuro); }
+.footer-info { display: flex; gap: 20px; }
+
+/* =========================================
+   4. DASHBOARD - GRÁFICOS E RELATÓRIOS
+========================================= */
+.cards-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin-bottom: 25px;
+}
+
+.card {
+    background-color: var(--branco);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-left: 5px solid var(--azul-primario);
+}
+
+.card-info h3 {
+    color: var(--cinza-texto);
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.card-info p {
+    color: var(--azul-escuro);
+    font-size: 24px;
+    font-weight: bold;
+    margin-top: 5px;
+}
+
+.card-icon {
+    font-size: 36px;
+    color: var(--azul-claro);
+}
+
+/* Container dos Gráficos */
+.charts-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 20px;
+}
+
+.chart-card {
+    background-color: var(--branco);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+    border-top: 4px solid var(--azul-primario);
+    display: flex;
+    flex-direction: column;
+}
+
+.chart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    border-bottom: 1px solid var(--azul-claro);
+    padding-bottom: 10px;
+}
+
+.chart-header h3 {
+    color: var(--azul-escuro);
+    font-size: 16px;
+}
+
+/* Espaço provisório onde os gráficos em JS vão entrar no futuro */
+.chart-placeholder {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: var(--cinza-placeholder);
+    min-height: 250px;
+    background-color: var(--cinza-fundo);
+    border-radius: 8px;
+    border: 2px dashed var(--azul-claro);
+    text-align: center;
+}
+
+.chart-placeholder i {
+    font-size: 40px;
+    color: var(--azul-claro);
+    margin-bottom: 15px;
+}
+
+/* =========================================
+   3. FORMULÁRIOS DE CADASTRO
+========================================= */
+.form-container {
+    background-color: var(--branco);
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+    border-top: 4px solid var(--azul-primario);
+}
+
+.form-header {
+    margin-bottom: 25px;
+    border-bottom: 1px solid var(--azul-claro);
+    padding-bottom: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.form-header h2 {
+    color: var(--azul-escuro);
+    font-size: 20px;
+}
+
+/* O segredo para colocar os campos lado a lado */
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+}
+
+/* Estilo para as caixas de seleção (Dropdowns) */
+select.form-input {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid var(--azul-claro);
+    border-radius: 6px;
+    font-size: 15px;
+    color: var(--azul-escuro);
+    background-color: var(--branco);
+    transition: all 0.3s ease;
+    outline: none;
+    cursor: pointer;
+}
+
+select.form-input:focus {
+    border-color: var(--azul-primario);
+    box-shadow: 0 0 0 3px rgba(41, 128, 185, 0.2);
+}
+
+.btn-submit {
+    padding: 12px 25px;
+    background-color: var(--azul-primario);
+    color: var(--branco);
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+    margin-top: 25px;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.btn-submit:hover { background-color: var(--azul-hover); }
+
+/* =========================================
+   5. TABELAS DE DADOS (Consulta de Estoque)
+========================================= */
+.table-container {
+    background-color: var(--branco);
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+    border-top: 4px solid var(--azul-primario);
+    overflow-x: auto; /* Permite rolar a tabela no celular sem quebrar a tela */
+}
+
+.table-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.table-header h2 {
+    color: var(--azul-escuro);
+    font-size: 20px;
+}
+
+/* Barra de Pesquisa Integrada */
+.search-bar {
+    display: flex;
+    align-items: center;
+    background-color: var(--cinza-fundo);
+    border: 1px solid var(--azul-claro);
+    border-radius: 25px;
+    padding: 10px 20px;
+    width: 100%;
+    max-width: 350px;
+    transition: all 0.3s;
+}
+
+.search-bar:focus-within {
+    border-color: var(--azul-primario);
+    box-shadow: 0 0 0 3px rgba(41, 128, 185, 0.1);
+}
+
+.search-bar input {
+    border: none;
+    background: transparent;
+    outline: none;
+    width: 100%;
+    margin-left: 10px;
+    color: var(--azul-escuro);
+    font-size: 14px;
+}
+
+/* Estrutura da Tabela */
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    white-space: nowrap; /* Impede que o texto quebre em várias linhas */
+}
+
+.data-table th {
+    background-color: var(--azul-fundo);
+    color: var(--azul-escuro);
+    padding: 15px;
+    font-weight: 600;
+    font-size: 14px;
+    border-bottom: 2px solid var(--azul-claro);
+}
+
+.data-table td {
+    padding: 15px;
+    border-bottom: 1px solid #f0f0f0;
+    color: var(--cinza-texto);
+    font-size: 14px;
+    vertical-align: middle;
+}
+
+.data-table tr:hover {
+    background-color: #fafcfd;
+}
+
+/* Badges de Status (UX Visual) */
+.badge {
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: bold;
+    display: inline-block;
+    text-align: center;
+    min-width: 90px;
+}
+
+.badge-success {
+    background-color: #e8f8f5;
+    color: #1abc9c; /* Verde */
+}
+
+.badge-warning {
+    background-color: #fef9e7;
+    color: #f39c12; /* Laranja */
+}
+
+.badge-danger {
+    background-color: #fdedec;
+    color: #e74c3c; /* Vermelho */
+}
+
+/* Botões de Ação dentro da Tabela (Editar/Excluir) */
+.action-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    margin-right: 12px;
+    transition: 0.2s;
+}
+
+.btn-edit { color: var(--azul-primario); }
+.btn-edit:hover { color: var(--azul-escuro); transform: scale(1.1); }
+
+.btn-delete { color: var(--vermelho-sair); }
+.btn-delete:hover { color: darkred; transform: scale(1.1); }
+
+/* =========================================
+   6. MODAIS (Telas de Sobreposição)
+========================================= */
+.modal-overlay {
+    display: none; /* Escondido por padrão */
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background-color: rgba(21, 67, 96, 0.7); /* Azul escuro com transparência */
+    z-index: 1000; /* Garante que fique por cima de tudo */
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-overlay.active {
+    display: flex; /* Mostra o modal */
+}
+
+.modal-content {
+    background-color: var(--branco);
+    padding: 30px;
+    border-radius: 12px;
+    width: 100%;
+    max-width: 450px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    position: relative;
+    animation: modalFadeIn 0.3s ease;
+}
+
+.modal-close {
+    position: absolute;
+    top: 15px; right: 20px;
+    font-size: 24px;
+    color: var(--cinza-texto);
+    cursor: pointer;
+    background: none; border: none;
+    transition: 0.2s;
+}
+
+.modal-close:hover { color: var(--vermelho-sair); }
+
+@keyframes modalFadeIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* =========================================
+   7. SISTEMA DE NOTIFICAÇÕES (TOASTS)
+========================================= */
+.toast-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.toast {
+    min-width: 300px;
+    padding: 15px 20px;
+    border-radius: 8px;
+    color: var(--branco);
+    font-weight: 600;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    transform: translateX(120%);
+    opacity: 0;
+    animation: slideInToast 0.4s forwards;
+}
+
+.toast.info { background-color: var(--azul-primario); }
+.toast.success { background-color: #27ae60; }
+.toast.error { background-color: var(--vermelho-sair); }
+
+/* Animação para entrar na tela */
+@keyframes slideInToast {
+    to { transform: translateX(0); opacity: 1; }
+}
+
+/* Animação para sair da tela */
+@keyframes fadeOutToast {
+    to { transform: translateX(120%); opacity: 0; }
+}

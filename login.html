@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - TechPaper</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="login-page">
+    
+    <div id="toastContainer" class="toast-container"></div>
+
+    <div class="login-wrapper">
+        <div class="login-container">
+            
+            <div class="logo-area">
+                <div class="logo-icon">
+                    <i class="fa-solid fa-box-open"></i>
+                </div>
+                <h1>TechPaper</h1>
+                <p>Gestão de Estoque e Vendas</p>
+            </div>
+
+            <form id="formLogin">
+                <div class="input-group">
+                    <label for="emailLogin">E-mail Corporativo</label>
+                    <div class="input-wrapper">
+                        <i class="fa-solid fa-envelope"></i>
+                        <input type="email" id="emailLogin" placeholder="Ex: joao.silva@techpaper.com" required>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label for="senhaLogin">Senha de Acesso</label>
+                    <div class="input-wrapper">
+                        <i class="fa-solid fa-lock"></i>
+                        <input type="password" id="senhaLogin" placeholder="Digite sua senha" required>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn-login">
+                    Entrar no Sistema
+                    <i class="fa-solid fa-arrow-right-to-bracket"></i>
+                </button>
+            </form>
+
+        <div class="login-footer">
+            &copy; 2026 TechPaper. <br>
+            Desenvolvido pela <a href="#">Equipe de Sistema</a>.
+        </div>
+    </div>
+
+    <script src="js/auth.js"></script>
+    <script src="js/login.js"></script>
+</body>
+</html>

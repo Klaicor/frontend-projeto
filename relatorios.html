@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Relatórios - TechPaper</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body class="dashboard-page">
+
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <i class="fa-solid fa-file-signature"></i>
+            <h2>TechPaper</h2>
+        </div>
+        <ul class="nav-links">
+            <li><a href="dashboard.html"><i class="fa-solid fa-chart-line"></i> Visão Geral</a></li>
+            <li><a href="produtos.html"><i class="fa-solid fa-tags"></i> Produtos</a></li>
+            <li><a href="fornecedores.html"><i class="fa-solid fa-truck-field"></i> Fornecedores</a></li>
+            <li><a href="estoque.html"><i class="fa-solid fa-boxes-stacked"></i> Estoque</a></li>
+            <li><a href="movimentacao.html"><i class="fa-solid fa-right-left"></i> Movimentação</a></li>
+            <li><a href="relatorios.html" class="active"><i class="fa-solid fa-file-invoice-dollar"></i> Relatórios</a>
+            <li><a href="usuarios.html"><i class="fa-solid fa-users-gear"></i> Usuários</a></li>
+            <li><a href="suporte.html"><i class="fa-solid fa-headset"></i> Suporte</a></li>
+        </ul>
+    </aside>
+
+    <main class="main-content">
+        <header class="topbar">
+            <h1>Relatórios Gerenciais</h1>
+
+            <div class="user-menu-container">
+                <div class="user-trigger" onclick="toggleUserMenu()">
+                    <span>Olá, Supervisor</span>
+                    <i class="fa-solid fa-circle-user user-icon"></i>
+                    <i class="fa-solid fa-chevron-down" style="font-size: 10px; color: #ccc;"></i>
+                </div>
+
+                <div class="user-dropdown" id="userDropdown">
+                    <a href="#" onclick="abrirModal('modalMeusDados'); return false;"><i
+                            class="fa-solid fa-address-card"></i> Meus Dados</a>
+                    <a href="#" onclick="abrirModal('modalConfig'); return false;"><i class="fa-solid fa-gear"></i>
+                        Configurações</a>
+                    <a href="index.html" class="logout"><i class="fa-solid fa-power-off"></i> Encerrar Sessão</a>
+                </div>
+            </div>
+        </header>
+
+        <section class="content-area">
+            <div class="page-body">
+
+                <style>
+                    @media print {
+
+                        .sidebar,
+                        .topbar,
+                        .user-menu-container,
+                        .filtros-container,
+                        button,
+                        .btn-export {
+                            display: none !important;
+                        }
+
+                        .content-area,
+                        .main-content {
+                            margin: 0 !important;
+                            padding: 0 !important;
+                            width: 100% !important;
+                        }
+
+                        .cabecalho-impressao {
+                            display: block !important;
+                        }
+                    }
+
+                    .btn-export {
+                        padding: 8px 15px;
+                        border-radius: 5px;
+                        color: white;
+                        cursor: pointer;
+                        border: none;
+                        font-weight: bold;
+                    }
+
+                    .btn-excel {
+                        background-color: #27ae60;
+                    }
+
+                    .btn-pdf {
+                        background-color: #c0392b;
+                    }
+                </style>
+
+                <div class="form-container" style="margin-top: 20px;">
+
+                    <div class="filtros-container" style="margin-bottom: 30px;">
+                        <h2 style="color: var(--azul-escuro); margin-bottom: 15px;"><i class="fa-solid fa-filter"></i>
+                            Filtros do Relatório</h2>
+
+                        <div class="form-grid">
+                            <div class="input-group">
+                                <label>Tipo de Relatório</label>
+                                <select id="tipoRelatorio" class="form-input">
+                                    <option value="estoque_atual">Posição Atual de Estoque</option>
+                                    <option value="entradas">Histórico de Entradas (Compras)</option>
+                                    <option value="saidas">Histórico de Saídas (Vendas)</option>
+                                    <option value="estoque_critico">Produtos com Estoque Crítico</option>
+                                </select>
+                            </div>
+
+                            <div class="input-group">
+                                <label>Filtrar por Categoria</label>
+                                <select id="categoriaFiltro" class="form-input">
+                                    <option value="Todas">Todas as Categorias</option>
+                                    <option value="cadernos">Cadernos e Agendas</option>
+                                    <option value="escrita">Canetas e Lápis</option>
+                                    <option value="papel">Papéis (A4, Sulfite)</option>
+                                </select>
+                            </div>
+
+                            <div class="input-group">
+                                <label>Data Inicial</label>
+                                <input type="date" id="dataInicio" class="form-input">
+                            </div>
+
+                            <div class="input-group">
+                                <label>Data Final</label>
+                                <input type="date" id="dataFim" class="form-input">
+                            </div>
+                        </div>
+
+                        <div style="text-align: right; margin-top: 15px;">
+                            <button class="btn-submit" onclick="gerarRelatorio()"><i class="fa-solid fa-search"></i>
+                                Gerar Relatório</button>
+                        </div>
+                    </div>
+
+                    <div id="areaResultados">
+                        <div
+                            style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                            <h3 style="color: var(--azul-escuro);" id="tituloResultado"><i
+                                    class="fa-solid fa-list-check"></i> Resultados</h3>
+                            <div style="display: flex; gap: 10px;">
+                                <button class="btn-export btn-excel" onclick="exportarExcel()"><i
+                                        class="fa-solid fa-file-excel"></i> Excel</button>
+                                <button class="btn-export btn-pdf" onclick="exportarPDF()"><i
+                                        class="fa-solid fa-file-pdf"></i> PDF</button>
+                            </div>
+                        </div>
+
+                        <div class="cabecalho-impressao"
+                            style="display: none; text-align: center; margin-bottom: 20px;">
+                            <h2>TechPaper - Sistema de Gestão</h2>
+                            <h3 id="tituloImpressao">Relatório Gerencial</h3>
+                            <hr>
+                        </div>
+
+                        <table id="tabelaRelatorio" style="width: 100%; border-collapse: collapse;">
+                            <thead id="cabecalhoTabela"
+                                style="border-bottom: 2px solid #eee; text-align: left; color: #7f8c8d; background-color: #f8f9fa;">
+                            </thead>
+
+                            <tbody id="corpoTabelaRelatorio">
+                                <tr>
+                                    <td style="text-align: center; padding: 20px;">Selecione os filtros e clique em
+                                        "Gerar Relatório".</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+        </section>
+
+        <footer class="dashboard-footer">
+            <div>&copy; 2026 <b>TechPaper Sistema de Gestão</b>. Todos os direitos reservados.</div>
+            <div class="footer-info">
+                <span><i class="fa-solid fa-code"></i> Versão 1.0.0</span>
+            </div>
+        </footer>
+    </main>
+
+    
+    <div class="modal-overlay" id="modalMeusDados">
+        <div class="modal-content">
+            <button class="modal-close" onclick="fecharModal('modalMeusDados')"><i
+                    class="fa-solid fa-xmark"></i></button>
+            <h2 style="color: var(--azul-escuro); margin-bottom: 20px;"><i class="fa-solid fa-address-card"></i> Meu
+                Perfil</h2>
+
+            <div class="input-group">
+                <label>Nome Completo</label>
+                <input type="text" class="form-input" value="Administrador Sistema" readonly
+                    style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; background-color: #f9f9f9;">
+            </div>
+
+            <div class="input-group">
+                <label>E-mail Corporativo</label>
+                <input type="email" class="form-input" value="admin@techpaper.com" readonly
+                    style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; background-color: #f9f9f9;">
+            </div>
+
+            <div class="input-group">
+                <label>Nível de Acesso</label>
+                <input type="text" class="form-input" value="Supervisor Total" readonly
+                    style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; background-color: #f9f9f9; color: var(--azul-primario); font-weight: bold;">
+            </div>
+
+            <button class="btn-submit" onclick="fecharModal('modalMeusDados')"
+                style="width: 100%; margin-top: 10px;">Fechar</button>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="modalConfig">
+        <div class="modal-content">
+            <button class="modal-close" onclick="fecharModal('modalConfig')"><i class="fa-solid fa-xmark"></i></button>
+            <h2 style="color: var(--azul-escuro); margin-bottom: 20px;"><i class="fa-solid fa-gear"></i> Configurações
+            </h2>
+
+            <div style="display: flex; flex-direction: column; gap: 15px;">
+                <label
+                    style="display: flex; align-items: center; gap: 10px; cursor: pointer; color: var(--azul-escuro);">
+                    <input type="checkbox" checked style="width: 18px; height: 18px;"> Receber alertas de estoque baixo
+                    por e-mail
+                </label>
+
+                <label
+                    style="display: flex; align-items: center; gap: 10px; cursor: pointer; color: var(--azul-escuro);">
+                    <input type="checkbox" style="width: 18px; height: 18px;"> Ativar modo escuro (Dark Mode)
+                </label>
+
+                <div class="input-group" style="margin-top: 10px;">
+                    <label>Idioma do Sistema</label>
+                    <select style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px;">
+                        <option value="pt" selected>Português (BR)</option>
+                        <option value="en">Inglês (US)</option>
+                        <option value="es">Espanhol</option>
+                    </select>
+                </div>
+            </div>
+
+            <button class="btn-submit" onclick="fecharModal('modalConfig')"
+                style="width: 100%; margin-top: 20px; background-color: #27ae60;">Salvar Preferências</button>
+        </div>
+    </div>
+
+    <script>
+        function toggleUserMenu() {
+            const dropdown = document.getElementById('userDropdown');
+            dropdown.classList.toggle('active');
+        }
+
+        window.onclick = function (event) {
+            if (!event.target.closest('.user-menu-container')) {
+                const dropdown = document.getElementById('userDropdown');
+                if (dropdown.classList.contains('active')) {
+                    dropdown.classList.remove('active');
+                }
+            }
+        }
+
+        // Funções para simular a geração e exportação
+        function gerarRelatorio(event) {
+            event.preventDefault();
+            const tipo = document.getElementById('tipoRelatorio').options[document.getElementById('tipoRelatorio').selectedIndex].text;
+            alert(`Buscando dados para o relatório: ${tipo}...`);
+        }
+
+        function exportarPDF() {
+            alert("Iniciando a geração do arquivo PDF. (Esta função será implementada no JavaScript/C# futuramente).");
+        }
+
+        function exportarExcel() {
+            alert("Exportando tabela para Excel (.xlsx)...");
+        }
+
+        // Funções para abrir e fechar os Modais
+        function abrirModal(idModal) {
+            document.getElementById(idModal).classList.add('active');
+            // Fecha o dropdown do usuário automaticamente para a tela ficar limpa
+            document.getElementById('userDropdown').classList.remove('active');
+        }
+
+        function fecharModal(idModal) {
+            document.getElementById(idModal).classList.remove('active');
+        }
+    </script>
+    <script src="js/relatorios.js"></script>
+        <script src="js/auth.js"></script>
+    
+</body>
+
+</html>

@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel - TechPaper</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body class="dashboard-page">
+
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <i class="fa-solid fa-file-signature"></i>
+            <h2>TechPaper</h2>
+        </div>
+        <ul class="nav-links">
+            <li><a href="dashboard.html" class="active"><i class="fa-solid fa-chart-line"></i> Visão Geral</a></li>
+            <li><a href="produtos.html"><i class="fa-solid fa-tags"></i> Produtos</a></li>
+            <li><a href="fornecedores.html"><i class="fa-solid fa-truck-field"></i> Fornecedores</a></li>
+            <li><a href="estoque.html"><i class="fa-solid fa-boxes-stacked"></i> Estoque</a></li>
+            <li><a href="movimentacao.html"><i class="fa-solid fa-right-left"></i> Movimentação</a></li>
+            <li><a href="relatorios.html"><i class="fa-solid fa-file-invoice-dollar"></i> Relatórios</a></li>
+            <li><a href="usuarios.html"><i class="fa-solid fa-users-gear"></i> Usuários</a></li>
+            <li><a href="suporte.html"><i class="fa-solid fa-headset"></i> Suporte</a></li>
+        </ul>
+    </aside>
+
+    <main class="main-content">
+        <header class="topbar">
+            <h1>Visão Geral do Sistema</h1>
+
+            <div class="user-menu-container">
+                <div class="user-trigger" onclick="toggleUserMenu()">
+                    <span>Olá, Supervisor</span>
+                    <i class="fa-solid fa-circle-user user-icon"></i>
+                    <i class="fa-solid fa-chevron-down" style="font-size: 10px; color: #ccc;"></i>
+                </div>
+
+                <div class="user-dropdown" id="userDropdown">
+                    <a href="#" onclick="abrirModal('modalMeusDados'); return false;"><i
+                            class="fa-solid fa-address-card"></i> Meus Dados</a>
+                    <a href="#" onclick="abrirModal('modalConfig'); return false;"><i class="fa-solid fa-gear"></i>
+                        Configurações</a>
+                    <a href="login.html" class="logout"><i class="fa-solid fa-power-off"></i> Encerrar Sessão</a>
+                </div>
+            </div>
+        </header>
+
+        <section class="content-area">
+            <div class="page-body">
+
+                <div class="cards-container">
+                    <div class="card">
+                        <div class="card-info">
+                            <h3>Total de Produtos</h3>
+                            <h2 id="cardTotalProdutos">0</h2>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-info">
+                            <h3>Estoque Crítico (< 20)</h3>
+                                    <h2 id="cardEstoqueBaixo" style="color: var(--vermelho-sair);">0</h2>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-info">
+                            <h3>Fornecedores Ativos</h3>
+                            <h2 id="cardFornecedores">0</h2>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-info">
+                            <h3>Movimentações Hoje</h3>
+                            <h2>
+                                <span id="cardEntradasHoje" style="color: #27ae60;">0</span> In /
+                                <span id="cardSaidasHoje" style="color: var(--vermelho-sair);">0</span> Out
+                            </h2>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="charts-container">
+
+                    <div class="card-grafico">
+                        <div style="padding: 15px; border-bottom: 1px solid #eee;">
+                            <h3 style="color: var(--azul-escuro);"><i class="fa-solid fa-chart-pie"></i> Estoque por
+                                Categoria</h3>
+                        </div>
+                        <div style="padding: 20px; height: 300px; display: flex; justify-content: center;">
+                            <canvas id="graficoCategoria"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="card-grafico">
+                        <div style="padding: 15px; border-bottom: 1px solid #eee;">
+                            <h3 style="color: var(--azul-escuro);"><i class="fa-solid fa-chart-simple"></i> Resumo de
+                                Movimentações (Qtd)</h3>
+                        </div>
+                        <div style="padding: 20px; height: 300px; display: flex; justify-content: center;">
+                            <canvas id="graficoMovimentacao"></canvas>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+        <footer class="dashboard-footer">
+            <div>
+                &copy; 2026 <b>TechPaper Sistema de Gestão</b>. Todos os direitos reservados.
+            </div>
+            <div class="footer-info">
+                <span><i class="fa-solid fa-code"></i> Versão 1.0.0</span>
+            </div>
+        </footer>
+    </main>
+
+    <div class="modal-overlay" id="modalMeusDados">
+        <div class="modal-content">
+            <button class="modal-close" onclick="fecharModal('modalMeusDados')"><i
+                    class="fa-solid fa-xmark"></i></button>
+            <h2 style="color: var(--azul-escuro); margin-bottom: 20px;"><i class="fa-solid fa-address-card"></i> Meu
+                Perfil</h2>
+
+            <div class="input-group">
+                <label>Nome Completo</label>
+                <input type="text" class="form-input" value="Administrador Sistema" readonly
+                    style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; background-color: #f9f9f9;">
+            </div>
+
+            <div class="input-group">
+                <label>E-mail Corporativo</label>
+                <input type="email" class="form-input" value="admin@techpaper.com" readonly
+                    style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; background-color: #f9f9f9;">
+            </div>
+
+            <div class="input-group">
+                <label>Nível de Acesso</label>
+                <input type="text" class="form-input" value="Supervisor Total" readonly
+                    style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; background-color: #f9f9f9; color: var(--azul-primario); font-weight: bold;">
+            </div>
+
+            <button class="btn-submit" onclick="fecharModal('modalMeusDados')"
+                style="width: 100%; margin-top: 10px;">Fechar</button>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="modalConfig">
+        <div class="modal-content">
+            <button class="modal-close" onclick="fecharModal('modalConfig')"><i class="fa-solid fa-xmark"></i></button>
+            <h2 style="color: var(--azul-escuro); margin-bottom: 20px;"><i class="fa-solid fa-gear"></i> Configurações
+            </h2>
+
+            <div style="display: flex; flex-direction: column; gap: 15px;">
+                <label
+                    style="display: flex; align-items: center; gap: 10px; cursor: pointer; color: var(--azul-escuro);">
+                    <input type="checkbox" checked style="width: 18px; height: 18px;"> Receber alertas de estoque baixo
+                    por e-mail
+                </label>
+
+                <label
+                    style="display: flex; align-items: center; gap: 10px; cursor: pointer; color: var(--azul-escuro);">
+                    <input type="checkbox" style="width: 18px; height: 18px;"> Ativar modo escuro (Dark Mode)
+                </label>
+
+                <div class="input-group" style="margin-top: 10px;">
+                    <label>Idioma do Sistema</label>
+                    <select style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px;">
+                        <option value="pt" selected>Português (BR)</option>
+                        <option value="en">Inglês (US)</option>
+                        <option value="es">Espanhol</option>
+                    </select>
+                </div>
+            </div>
+
+            <button class="btn-submit" onclick="fecharModal('modalConfig')"
+                style="width: 100%; margin-top: 20px; background-color: #27ae60;">Salvar Preferências</button>
+        </div>
+    </div>
+
+    <script>
+        function toggleUserMenu() {
+            const dropdown = document.getElementById('userDropdown');
+            dropdown.classList.toggle('active');
+        }
+
+        window.onclick = function (event) {
+            if (!event.target.closest('.user-menu-container')) {
+                const dropdown = document.getElementById('userDropdown');
+                if (dropdown.classList.contains('active')) {
+                    dropdown.classList.remove('active');
+                }
+            }
+        }
+        // Funções para abrir e fechar os Modais
+        function abrirModal(idModal) {
+            document.getElementById(idModal).classList.add('active');
+            // Fecha o dropdown do usuário automaticamente para a tela ficar limpa
+            document.getElementById('userDropdown').classList.remove('active');
+        }
+
+        function fecharModal(idModal) {
+            document.getElementById(idModal).classList.remove('active');
+        }
+    </script>
+    <script src="js/dashboard.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="js/auth.js"></script>
+
+</body>
+</body>
+
+</html>
